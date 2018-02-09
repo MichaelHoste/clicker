@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
-import '../css/App.css';
+import '../css/app.css';
+
+import Money from './Money.js';
+import Upgrades from './Upgrades.js';
+import Ideas from './Ideas.js';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      amount: 1000
+    }
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className="clicker-container">
+        <Money amount={this.state.amount} />
+        <Upgrades />
+        <Ideas />
       </div>
     );
   }
