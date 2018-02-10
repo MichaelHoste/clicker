@@ -3,8 +3,11 @@ import React, { Component } from 'react';
 class Upgrade extends Component {
 
   render() {
+    let opacity = this.props.amount < this.props.costToLevelUp ? 0.2 : 1.0
+
     return (
-      <div className="upgrade">
+      <div className="upgrade"
+           style={{ opacity: opacity }}>
         <div className="level-up">
           <div className="text">
             Level up

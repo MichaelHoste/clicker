@@ -13,7 +13,12 @@ class App extends Component {
     this.state = {
       amount: 0,
       increasePerSecond: 0,
-      increasePerClick: 1
+      increasePerClick: 1,
+      levels: {
+        brainstorming: 0,
+        coach:         0,
+        cofounder:     0
+      }
     }
   }
 
@@ -28,8 +33,10 @@ class App extends Component {
       <div className="clicker-container">
         <Money amount={this.state.amount} />
 
-        <Upgrades increasePerSecond={this.state.increasePerSecond}
-                  increasePerClick={this.state.increasePerClick} />
+        <Upgrades amount={this.state.amount}
+                  increasePerSecond={this.state.increasePerSecond}
+                  increasePerClick={this.state.increasePerClick}
+                  levels={this.state.levels} />
 
         <Ideas click={this.click.bind(this)} />
       </div>
