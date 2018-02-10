@@ -1,41 +1,28 @@
 import React, { Component } from 'react';
 
 import Revenue from './Revenue';
+import Upgrade from './Upgrade';
 
 class Upgrades extends Component {
 
   render() {
     return (
       <div className="upgrades">
-        <Revenue />
-        { this.renderUpgrades() }
-        { this.renderUpgrades() }
-        { this.renderUpgrades() }
-        { this.renderUpgrades() }
+        <Revenue increasePerSecond={this.props.increasePerSecond}
+                 increasePerClick={this.props.increasePerClick} />
+        { this.renderUpgrade() }
+        { this.renderUpgrade() }
+        { this.renderUpgrade() }
+        { this.renderUpgrade() }
       </div>
     );
   }
 
-  renderUpgrades() {
+  renderUpgrade() {
     return (
-      <div className="upgrade">
-        <div className="level-up">
-          <div className="text">
-            Level up
-          </div>
-          <div className="value">
-            $3
-          </div>
-        </div>
-        <div className="name">
-          Coach entrepreneurial
-        </div>
-        <div className="level">
-          Lvl 34
-        </div>
-        <div style={{ clear:'both' }}>
-        </div>
-      </div>
+      <Upgrade name="Coach entrepreneurial"
+               level={34}
+               costToLevelUp={3} />
     )
   }
 }

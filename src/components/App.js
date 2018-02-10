@@ -11,16 +11,27 @@ class App extends Component {
     super(props)
 
     this.state = {
-      amount: 1000
+      amount: 0,
+      increasePerSecond: 0,
+      increasePerClick: 1
     }
+  }
+
+  click() {
+    this.setState({
+      amount: this.state.amount + this.state.increasePerClick
+    })
   }
 
   render() {
     return (
       <div className="clicker-container">
         <Money amount={this.state.amount} />
-        <Upgrades />
-        <Ideas />
+
+        <Upgrades increasePerSecond={this.state.increasePerSecond}
+                  increasePerClick={this.state.increasePerClick} />
+
+        <Ideas click={this.click.bind(this)} />
       </div>
     );
   }

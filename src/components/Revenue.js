@@ -6,11 +6,11 @@ class Revenue extends Component {
     return (
       <div className="revenue">
         <div className="dollars-per-second">
-          $20
+          ${this.props.increasePerSecond}
         </div>
 
         <div className="dollars-per-click">
-          $5
+          ${this.props.increasePerClick}
         </div>
       </div>
     );

@@ -23,6 +23,7 @@ div {
     text-align: center;
     line-height: 38px;
     border: 1px solid black;
+    font-size: 22px;
   }
 
   .upgrades {
@@ -79,7 +80,7 @@ div {
           text-transform: uppercase;
         }
 
-        .value {
+        .cost {
           font-size: 19px;
         }
       }
@@ -110,8 +111,12 @@ div {
     img.lightbulb {
       position: absolute;
       width: 200px;
-      bottom: 140px;
-      left: 128px;
+      bottom: 150px;
+      left: 100px;
+      border-radius: 10000px;
+      border: 1px solid #999999;
+      padding: 32px;
+      background-color: whitesmoke;
     }
   }
 }
