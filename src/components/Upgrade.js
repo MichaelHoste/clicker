@@ -2,30 +2,58 @@ import React, { Component } from 'react';
 
 class Upgrade extends Component {
 
+  levelUp() {
+    if(this.isBuyable()) {
+      this.props.levelUp(this.props.keyName);
+    }
+  }
+
+  isBuyable() {
+    return this.props.amount > this.props.costToLevelUp;
+  }
+
   render() {
-    let opacity = this.props.amount < this.props.costToLevelUp ? 0.2 : 1.0
+    let opacity = this.isBuyable() ? 1.0 : 0.2;
 
     return (
       <div className="upgrade"
            style={{ opacity: opacity }}>
-        <div className="level-up">
-          <div className="text">
-            Level up
-          </div>
-          <div className="cost">
-            ${this.props.costToLevelUp}
-          </div>
-        </div>
+        { this.renderLevelUpButton() }
         <div className="name">
           { this.props.name }
         </div>
-        <div className="level">
-          Lvl { this.props.level }
-        </div>
+        { this.renderLevel() }
         <div style={{ clear:'both' }}>
         </div>
       </div>
     );
+  }
+
+  renderLevelUpButton() {
+    let text = this.props.level === 0 ? this.props.firstActionText : this.props.nextActionsText;
+
+    return (
+      <div className="level-up"
+           onClick={this.levelUp.bind(this)}>
+        <div className="text">
+          { text }
+        </div>
+        <div className="cost">
+          ${this.props.costToLevelUp}
+        </div>
+      </div>
+    )
+  }
+
+  renderLevel() {
+    let style = this.props.level === 0 ? { visibility: 'hidden' } : {};
+
+    return (
+      <div className="level"
+           style={style}>
+        Lvl { this.props.level }
+      </div>
+    )
   }
 }
 

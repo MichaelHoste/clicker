@@ -5,7 +5,7 @@ class Money extends Component {
   render() {
     return (
       <div className="money">
-        ${ this.props.amount }
+        ${ this.props.amount.toFixed(0) }
       </div>
     );
   }
