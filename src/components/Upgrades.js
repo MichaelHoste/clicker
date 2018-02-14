@@ -10,7 +10,8 @@ class Upgrades extends Component {
     return (
       <div className="upgrades">
         <Revenue increasePerSecond={this.props.increasePerSecond}
-                 increasePerClick={this.props.increasePerClick} />
+                 increasePerClick={this.props.increasePerClick}
+                 formatAmount={this.props.formatAmount} />
 
         <div className="upgrades-list">
           { this.renderUpgrades() }
@@ -40,7 +41,8 @@ class Upgrades extends Component {
                    costToLevelUp={upgrade['costToLevelUp'](level)}
                    levelUpIncreasePerClick={upgrade['levelUpIncreasePerClick'](level)}
                    levelUpIncreasePerSecond={upgrade['levelUpIncreasePerSecond'](level)}
-                   levelUp={this.props.levelUp} />
+                   levelUp={this.props.levelUp}
+                   formatAmount={this.props.formatAmount} />
         )
       }
     })

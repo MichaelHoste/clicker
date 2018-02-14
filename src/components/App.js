@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import '../css/app.css';
 
-import Money from './Money.js';
+import Money    from './Money.js';
 import Upgrades from './Upgrades.js';
-import Ideas from './Ideas.js';
+import Ideas    from './Ideas.js';
+import Settings from './Settings.js';
 
 class App extends Component {
 
@@ -30,9 +31,9 @@ class App extends Component {
   componentDidMount() {
     this.timer = setInterval(() => {
       this.setState({
-        amount: this.state.amount + this.state.increasePerSecond / 5.0
+        amount: this.state.amount + this.state.increasePerSecond / 10.0
       })
-    }, 200);
+    }, 100);
   }
 
   componentWillUnmount() {
@@ -40,7 +41,7 @@ class App extends Component {
   }
 
   exponential() {
-    return 1.14;
+    return 1.35;
   }
 
   powerFormula(base, level) {
@@ -56,8 +57,8 @@ class App extends Component {
         name: "Brainstorming",
         firstActionText: "Make",
         nextActionsText: "Level up",
-        costToLevelUp: (level) => level > 15 ? this.powerFormula(20, level) : Math.floor((5 + level) * Math.pow(1.07, Math.max(0, level - 1))),
-        levelUpIncreasePerClick: (level) => 1,
+        costToLevelUp: (level) => this.powerFormula(5, level),
+        levelUpIncreasePerClick: (level) => 1 + Math.floor(Math.pow(level, 1.14)),
         levelUpIncreasePerSecond: (level) => 0
       },
       market: {
@@ -119,6 +120,46 @@ class App extends Component {
     }
   }
 
+  // 1K  = 1,000 = One Thousand
+  // 1M  = 1,000K  = One Million
+  // 1B  = 1,000M  = One Billion
+  // 1T  = 1,000B  = One Trillion
+  // 1q  = 1,000T  = One Quadrillion
+  // 1Q  = 1,000q  = One Quintillion
+  // 1s  = 1,000Q  = One Sextillion
+  // 1S  = 1,000s  = One Septillion
+  // 1O  = 1,000S  = One Octillion
+  // 1N  = 1,000O  = One Nonillion
+  // 1d  = 1,000N  = One Decillion
+  // 1U  = 1,000d  = One Undecillion
+  // 1D  = 1,000U  = One Duodecillion
+  // 1!  = 1,000D  = One Tredecillion
+  // 1@  = 1,000!  = One Quattuordecillion
+  // 1#  = 1,000@  = One Quindecillion
+  // 1$  = 1,000#  = One Sexdecillion
+  // 1%  = 1,000$  = One Septendecillion
+  // 1^  = 1,000%  = One Octodecillion
+  // 1&  = 1,000^  = One Novemdecillion
+  // 1*  = 1,000&  = One Vigintillion
+  // A lot > 1,000*  < A lot
+  formatAmount(amount) {
+    if(amount >= 10000000000000) {
+      return `${(amount/1000000000000).toFixed(0)}T`
+    }
+    else if(amount >= 10000000000) {
+      return `${(amount/1000000000).toFixed(0)}B`
+    }
+    else if(amount >= 10000000) {
+      return `${(amount/1000000).toFixed(0)}M`
+    }
+    else if(amount >= 10000) {
+      return `${(amount/1000).toFixed(0)}K`
+    }
+    else {
+      return `${amount.toFixed(0)}`
+    }
+  }
+
   click() {
     this.setState({
       amount: this.state.amount + this.state.increasePerClick
@@ -142,19 +183,30 @@ class App extends Component {
     })
   }
 
+  importStateInBase64(base64State) {
+    this.setState(
+      JSON.parse(atob(base64State))
+    )
+  }
+
   render() {
     return (
       <div className="clicker-container">
-        <Money amount={this.state.amount} />
+        <Money amount={this.state.amount}
+               formatAmount={this.formatAmount.bind(this)} />
 
         <Upgrades amount={this.state.amount}
                   upgrades={this.upgrades()}
                   increasePerSecond={this.state.increasePerSecond}
                   increasePerClick={this.state.increasePerClick}
                   levels={this.state.levels}
-                  levelUp={this.levelUp.bind(this)} />
+                  levelUp={this.levelUp.bind(this)}
+                  formatAmount={this.formatAmount.bind(this)} />
 
         <Ideas click={this.click.bind(this)} />
+
+        <Settings currentState={this.state}
+                  importStateInBase64={this.importStateInBase64.bind(this)} />
       </div>
     );
   }
