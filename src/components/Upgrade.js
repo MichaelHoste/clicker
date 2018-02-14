@@ -30,10 +30,12 @@ class Upgrade extends Component {
   }
 
   renderLevelUpButton() {
-    let text = this.props.level === 0 ? this.props.firstActionText : this.props.nextActionsText;
+    let text   = this.props.level === 0 ? this.props.firstActionText : this.props.nextActionsText;
+    let cursor = this.isBuyable() ? 'pointer' : 'default';
 
     return (
       <div className="level-up"
+           style={{ cursor: cursor }}
            onClick={this.levelUp.bind(this)}>
         <div className="text">
           { text }
