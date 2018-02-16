@@ -36,26 +36,38 @@ div {
       position: relative;
       height: 50px;
 
-      .dollars-per-second {
+      .dollars-per-second, .dollars-per-click {
         position: absolute;
-        left: 30px;
         top: 10px;
-        width: 60px;
-        height: 30px;
+        width: 80px;
+        height: 32px;
         border: 1px solid black;
         text-align: center;
-        line-height: 27px;
+        font-size: 14px;
+
+        em {
+          display: block;
+          font-style: normal;
+          font-size: 11px;
+          background-color: white;
+          border: 1px solid black;
+          margin-left: 8px;
+          margin-right: 8px;
+          margin-top: -6px;
+        }
+
+        span {
+          line-height: 24px;
+          display: block;
+        }
+      }
+
+      .dollars-per-second {
+        right: 50px;
       }
 
       .dollars-per-click {
-        position: absolute;
-        right: 30px;
-        top: 10px;
-        width: 60px;
-        height: 30px;
-        border: 1px solid black;
-        text-align: center;
-        line-height: 27px;
+        left: 50px;
       }
     }
 

@@ -9,11 +9,13 @@ class Revenue extends Component {
     return (
       <div className="revenue">
         <div className="dollars-per-second">
-          ${formattedIncreasePerSecond}
+          <em>per second</em>
+          <span>${formattedIncreasePerSecond}</span>
         </div>
 
         <div className="dollars-per-click">
-          ${formattedIncreasePerClick}
+          <em>per click</em>
+          <span>${formattedIncreasePerClick}</span>
         </div>
       </div>
     );
