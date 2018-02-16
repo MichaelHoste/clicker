@@ -8,20 +8,22 @@ class Settings extends Component {
     this.state = {
       saveModalIsOpen: false,
       loadModalIsOpen: false,
-      stringToLoad:    ""
+      stringToLoad:    "",
+      savedString:     ""
     }
   }
 
   openSaveModal() {
     this.setState({
       saveModalIsOpen: true
-    })
+    }, this.createAndSelectSavedString.bind(this))
   }
 
   openLoadModal() {
     this.setState({
-      loadModalIsOpen: true
-    })
+      loadModalIsOpen: true,
+      stringToLoad:    ""
+    }, this.selectLoadedString.bind(this))
   }
 
   closeModals() {
@@ -37,12 +39,32 @@ class Settings extends Component {
     })
   }
 
-  base64State() {
-    return btoa(JSON.stringify(this.props.currentState))
+  createAndSelectSavedString() {
+    this.setState({
+      savedString: this.base64State(this.props.currentState)
+    }, this.selectSavedString.bind(this))
+  }
+
+  selectSavedString() {
+    this.refs.saveTextarea.select();
+  }
+
+  selectLoadedString() {
+    this.refs.loadTextarea.select();
+  }
+
+  copySaveStringToClipboard() {
+    this.selectSavedString()
+    document.execCommand("Copy");
+  }
+
+  base64State(currentState) {
+    return btoa(JSON.stringify(currentState))
   }
 
   import() {
-    this.props.importStateInBase64(this.state.stringToLoad)
+    this.props.importStateInBase64(this.state.stringToLoad);
+    this.closeModals();
   }
 
   render() {
@@ -55,7 +77,8 @@ class Settings extends Component {
 
   renderSettings() {
     return (
-      <div className="settings">
+      <div className="settings"
+           key="settings">
         <div className="save"
              onClick={this.openSaveModal.bind(this)}>
           Save
@@ -72,13 +95,16 @@ class Settings extends Component {
   renderSaveWindows() {
     if(this.state.saveModalIsOpen) {
       return (
-        <div className="save-modal">
-          <textarea>
-            { this.base64State() }
+        <div className="save-modal"
+             key="saveModal">
+          <textarea ref="saveTextarea"
+                    value={this.state.savedString}
+                    readOnly>
           </textarea>
 
-          <button className="btn">
-            Copy to the clipboard
+          <button className="btn"
+                  onClick={this.copySaveStringToClipboard.bind(this)}>
+            Copy to clipboard
           </button>
 
           { this.renderCloseModal() }
@@ -90,9 +116,11 @@ class Settings extends Component {
   renderLoadWindows() {
     if(this.state.loadModalIsOpen) {
       return (
-        <div className="load-modal">
-          <textarea onChange={this.updateStringToLoad.bind(this)}>
-            { this.state.stringToLoad }
+        <div className="load-modal"
+             key="loadModal">
+          <textarea ref="loadTextarea"
+                    onChange={this.updateStringToLoad.bind(this)}
+                    value={ this.state.stringToLoad }>
           </textarea>
 
           <button className="btn"

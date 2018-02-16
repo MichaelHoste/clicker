@@ -29,7 +29,7 @@ class Upgrades extends Component {
       let level         = this.props.levels[key];
       let previousLevel = i > 0 ? this.props.levels[upgradeKeys[i-1]] : 0;
 
-      if(i == 0 || previousLevel > 0) {
+      if(i === 0 || previousLevel > 0) {
         return (
           <Upgrade key={i}
                    keyName={key}
