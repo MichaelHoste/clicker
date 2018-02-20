@@ -31,13 +31,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    let interval = 0.1; // 100ms
+    let interval = 0.03; // 30ms
 
     this.timer = setInterval(() => {
       this.setState({
         amount: this.state.amount + this.state.increasePerSecond * interval
       })
-    }, 1000 * interval);
+    }, 1000.0 * interval);
   }
 
   componentWillUnmount() {
