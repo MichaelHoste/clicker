@@ -76,6 +76,7 @@ div {
       height: 490px;
 
       .upgrade {
+        position: relative;
         border: 1px solid black;
         margin-left: 12px;
         margin-right: 14px;
@@ -102,7 +103,7 @@ div {
           }
         }
 
-        .name {
+        > .name {
           font-size: 15px;
           text-align: right;
           padding-right: 10px;
@@ -114,6 +115,40 @@ div {
           text-align: right;
           padding-right: 10px;
           margin-top: 3px;
+        }
+
+        .summary {
+          position: absolute;
+          width: 212px;
+          left: 104px;
+          top: 4px;
+          background-color: white;
+          z-index: 1;
+          border: 1px solid black;
+          padding: 6px;
+
+          .name {
+            font-size: 12px;
+            margin-top: 0px;
+            margin-bottom: 4px;
+          }
+
+          .description {
+            font-size: 13px;
+            margin-bottom: 2px;
+          }
+
+          .current-level, .next-level {
+            strong {
+              font-size: 12px;
+            }
+
+            .power {
+              font-size: 12px;
+              display: block;
+              margin-left: 8px;
+            }
+          }
         }
       }
     }

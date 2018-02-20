@@ -17,8 +17,8 @@ class App extends Component {
       increasePerClick:  1.0,
       levels: {
         brainstorming: 0,
-        market:        0,
         coach:         0,
+        market:        0,
         cofounder:     0,
         prototype:     0,
         seed:          0,
@@ -55,23 +55,26 @@ class App extends Component {
     return {
       brainstorming: {
         name: "Brainstorming",
+        description: "You *know* that you are an entrepreneur but you have no idea what to create.",
         firstActionText: "Make",
         nextActionsText: "Level up",
         costToLevelUp: (level) => this.powerFormula(5, level),
         levelUpIncreasePerClick: (level) => 1 + Math.floor(Math.pow(level, 1.14)),
         levelUpIncreasePerSecond: (level) => 0
       },
-      market: {
-        name: "Market Research",
-        firstActionText: "Conduct",
+      coach: {
+        name: "Entrepreneurial Coach",
+        description: "A friend said that you need a business model and a business plan. What are those?",
+        firstActionText: "Hire",
         nextActionsText: "Level up",
         costToLevelUp: (level) => this.powerFormula(50, level),
         levelUpIncreasePerClick: (level) => 0,
         levelUpIncreasePerSecond: (level) => 5
       },
-      coach: {
-        name: "Entrepreneurial Coach",
-        firstActionText: "Hire",
+      market: {
+        name: "Market Research",
+        description: "You just invented the new facebook for *stuff*. What if Facebook is already the new Facebook for *stuff*?",
+        firstActionText: "Conduct",
         nextActionsText: "Level up",
         costToLevelUp: (level) => this.powerFormula(250, level),
         levelUpIncreasePerClick: (level) => 0,
@@ -79,6 +82,7 @@ class App extends Component {
       },
       cofounder: {
         name: "Co-Founder",
+        description: "You took 2 months to create the next best app. You even wrote the specs (2 pages). Time to find a technical co-founder!",
         firstActionText: "Hire",
         nextActionsText: "Level up",
         costToLevelUp: (level) => this.powerFormula(1000, level),
@@ -87,6 +91,7 @@ class App extends Component {
       },
       prototype: {
         name: "Prototype",
+        description: "A prototype is the next best thing after a PowerPoint presentation. Please don't click here, it crashes the app.",
         firstActionText: "Create",
         nextActionsText: "Level up",
         costToLevelUp: (level) => this.powerFormula(4000, level),
@@ -95,6 +100,7 @@ class App extends Component {
       },
       seed: {
         name: "Seed Funding",
+        description: "I don't want to live on this basement anymore. Also, my co-founder develops signs of vitamin deficiency.",
         firstActionText: "Raise",
         nextActionsText: "Level up",
         costToLevelUp: (level) => this.powerFormula(20000, level),
@@ -103,6 +109,7 @@ class App extends Component {
       },
       employees: {
         name: "Employees",
+        description: "First employee will be a Human Resources Manager and he/she will deal with the next ones.",
         firstActionText: "Hire first",
         nextActionsText: "Hire",
         costToLevelUp: (level) => this.powerFormula(100000, level),
@@ -111,6 +118,7 @@ class App extends Component {
       },
       series: {
         name: "Serie A/B/C/... Fundings",
+        description: "We have 10M users, 30+ servers, 3 apps to maintain and no revenue. But we're the next big thing!",
         firstActionText: "Raise",
         nextActionsText: "Level up",
         costToLevelUp: (level) => this.powerFormula(1000000, level),

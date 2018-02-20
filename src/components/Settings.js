@@ -15,13 +15,15 @@ class Settings extends Component {
 
   openSaveModal() {
     this.setState({
-      saveModalIsOpen: true
+      saveModalIsOpen: true,
+      loadModalIsOpen: false
     }, this.createAndSelectSavedString.bind(this))
   }
 
   openLoadModal() {
     this.setState({
       loadModalIsOpen: true,
+      saveModalIsOpen: false,
       stringToLoad:    ""
     }, this.selectLoadedString.bind(this))
   }

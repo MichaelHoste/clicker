@@ -35,6 +35,7 @@ class Upgrades extends Component {
                    keyName={key}
                    amount={this.props.amount}
                    name={upgrade['name']}
+                   description={upgrade['description']}
                    level={level}
                    firstActionText={upgrade['firstActionText']}
                    nextActionsText={upgrade['nextActionsText']}
