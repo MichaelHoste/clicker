@@ -31,7 +31,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    let interval = 0.03; // 30ms
+    let interval = 0.05; // 50ms
 
     this.timer = setInterval(() => {
       this.setState({

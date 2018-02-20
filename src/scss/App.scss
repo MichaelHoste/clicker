@@ -31,7 +31,7 @@ div {
     float: left;
     width: 350px;
     height: 100%;
-    border-right: 1px solid black;
+    border-right: 1px dashed black;
 
     .revenue {
       position: relative;
@@ -83,6 +83,7 @@ div {
         margin-right: 14px;
         margin-bottom: 8px;
         padding: 8px;
+        box-shadow: 0px 0px 6px 0px #dddddd;
 
         .level-up {
           cursor: pointer;
@@ -146,6 +147,7 @@ div {
           z-index: 1;
           border: 1px solid black;
           padding: 6px;
+          box-shadow: 0px 0px 12px 4px #dddddd;
 
           .name {
             font-size: 12px;
