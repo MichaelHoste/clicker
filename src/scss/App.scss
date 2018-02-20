@@ -11,6 +11,7 @@ div {
   margin-left: 50%;
   left: -400px;
   border: 1px solid black;
+  user-select: none;
 
   .money {
     position: absolute;
@@ -36,7 +37,7 @@ div {
       position: relative;
       height: 50px;
 
-      .dollars-per-second, .dollars-per-click {
+      .increase-per-second, .increase-per-click {
         position: absolute;
         top: 10px;
         width: 80px;
@@ -62,11 +63,11 @@ div {
         }
       }
 
-      .dollars-per-second {
+      .increase-per-second {
         right: 50px;
       }
 
-      .dollars-per-click {
+      .increase-per-click {
         left: 50px;
       }
     }
@@ -86,12 +87,17 @@ div {
         .level-up {
           cursor: pointer;
           float: left;
-          border: 1px solid black;
+          border: 1px solid #888888;
           width: 90px;
           margin-right: 8px;
           text-align: center;
           padding: 8px;
           border-radius: 8px;
+
+          box-shadow: 0px 0px 6px 1px #dddddd;
+
+          transition: all 100ms ease-in;
+          transform: scale(1);
 
           .text {
             font-size: 13px;
@@ -101,6 +107,20 @@ div {
           .cost {
             font-size: 19px;
           }
+        }
+
+        .level-up:hover {
+          box-shadow: 0px 0px 6px 2px #dddddd;
+
+          transition: all 50ms ease-in;
+          //transform: scale(1.02);
+        }
+
+        .level-up:active {
+          box-shadow: 0px 0px 5px 1px #dddddd;
+
+          transition: all 100ms ease-in;
+          transform: scale(0.97);
         }
 
         > .name {
@@ -167,9 +187,29 @@ div {
       bottom: 150px;
       left: 100px;
       border-radius: 10000px;
-      border: 1px solid #999999;
+      border: 1px solid #cccccc;
       padding: 32px;
       background-color: whitesmoke;
+      cursor: pointer;
+
+      box-shadow: 0px 0px 12px 4px #dddddd;
+
+      transition: all 100ms ease-in;
+      transform: scale(1);
+    }
+
+    img.lightbulb:hover {
+      box-shadow: 0px 0px 12px 6px #dddddd;
+
+      transition: all 50ms ease-in;
+      transform: scale(1.02);
+    }
+
+    img.lightbulb:active {
+      box-shadow: 0px 0px 10px 1px #cccccc;
+
+      transition: all 100ms ease-in;
+      transform: scale(0.95);
     }
   }
 
@@ -205,6 +245,7 @@ div {
     border: 1px solid black;
     background-color: white;
     text-align: center;
+    box-shadow: 0px 0px 12px 4px #dddddd;
 
     textarea {
       width: 100%;

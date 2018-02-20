@@ -40,8 +40,8 @@ class Upgrades extends Component {
                    firstActionText={upgrade['firstActionText']}
                    nextActionsText={upgrade['nextActionsText']}
                    costToLevelUp={upgrade['costToLevelUp'](level)}
-                   levelUpIncreasePerClick={upgrade['levelUpIncreasePerClick'](level)}
-                   levelUpIncreasePerSecond={upgrade['levelUpIncreasePerSecond'](level)}
+                   levelUpIncreasePerClick={upgrade['levelUpIncreasePerClick']}
+                   levelUpIncreasePerSecond={upgrade['levelUpIncreasePerSecond']}
                    levelUp={this.props.levelUp}
                    formatAmount={this.props.formatAmount} />
         )

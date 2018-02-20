@@ -2,6 +2,18 @@ import React, { Component } from 'react';
 
 class Settings extends Component {
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      this.state.saveModalIsOpen != nextState.saveModalIsOpen
+      ||
+      this.state.loadModalIsOpen != nextState.loadModalIsOpen
+      ||
+      this.state.stringToLoad != nextState.stringToLoad
+      ||
+      this.state.savedString != nextState.savedString
+    )
+  }
+
   constructor(props) {
     super(props)
 

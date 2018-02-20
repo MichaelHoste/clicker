@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import _                    from 'lodash';
+
 import '../css/app.css';
 
 import Money    from './Money.js';
@@ -13,8 +15,8 @@ class App extends Component {
 
     this.state = {
       amount: 0.0,
-      increasePerSecond: 0.0,
-      increasePerClick:  1.0,
+      increasePerClick:  1,
+      increasePerSecond: 0,
       levels: {
         brainstorming: 0,
         coach:         0,
@@ -29,15 +31,41 @@ class App extends Component {
   }
 
   componentDidMount() {
+    let interval = 0.1; // 100ms
+
     this.timer = setInterval(() => {
       this.setState({
-        amount: this.state.amount + this.state.increasePerSecond / 10.0
+        amount: this.state.amount + this.state.increasePerSecond * interval
       })
-    }, 100);
+    }, 1000 * interval);
   }
 
   componentWillUnmount() {
      clearInterval(this.timer);
+  }
+
+  updateIncreasePerSecond() {
+    this.setState({
+      increasePerSecond: this.totalIncreasePer('Second')
+    })
+  }
+
+  updateIncreasePerClick() {
+    this.setState({
+      increasePerClick: 1 + this.totalIncreasePer('Click')
+    })
+  }
+
+  totalIncreasePer(unit) {
+    let upgradeKeys = _.keys(this.state.levels)
+
+    return _.sumBy(upgradeKeys, (upgradeKey) => {
+      let levelsRange = _.range(1, this.state.levels[upgradeKey] + 1)
+
+      return _.sumBy(levelsRange, (level) => {
+        return this.upgrades()[upgradeKey][`levelUpIncreasePer${unit}`](level)
+      })
+    })
   }
 
   exponential() {
@@ -59,7 +87,7 @@ class App extends Component {
         firstActionText: "Make",
         nextActionsText: "Level up",
         costToLevelUp: (level) => this.powerFormula(5, level),
-        levelUpIncreasePerClick: (level) => 1 + Math.floor(Math.pow(level, 1.14)),
+        levelUpIncreasePerClick: (level) => Math.floor(Math.pow(level, 1.14)),
         levelUpIncreasePerSecond: (level) => 0
       },
       coach: {
@@ -128,28 +156,6 @@ class App extends Component {
     }
   }
 
-  // 1K  = 1,000 = One Thousand
-  // 1M  = 1,000K  = One Million
-  // 1B  = 1,000M  = One Billion
-  // 1T  = 1,000B  = One Trillion
-  // 1q  = 1,000T  = One Quadrillion
-  // 1Q  = 1,000q  = One Quintillion
-  // 1s  = 1,000Q  = One Sextillion
-  // 1S  = 1,000s  = One Septillion
-  // 1O  = 1,000S  = One Octillion
-  // 1N  = 1,000O  = One Nonillion
-  // 1d  = 1,000N  = One Decillion
-  // 1U  = 1,000d  = One Undecillion
-  // 1D  = 1,000U  = One Duodecillion
-  // 1!  = 1,000D  = One Tredecillion
-  // 1@  = 1,000!  = One Quattuordecillion
-  // 1#  = 1,000@  = One Quindecillion
-  // 1$  = 1,000#  = One Sexdecillion
-  // 1%  = 1,000$  = One Septendecillion
-  // 1^  = 1,000%  = One Octodecillion
-  // 1&  = 1,000^  = One Novemdecillion
-  // 1*  = 1,000&  = One Vigintillion
-  // A lot > 1,000*  < A lot
   formatAmount(amount) {
     if(amount >= 10000000000000) {
       return `${(amount/1000000000000).toFixed(0)}T`
@@ -175,19 +181,20 @@ class App extends Component {
   }
 
   levelUp(name) {
-    let upgrades      = this.upgrades();
-    let upgrade       = upgrades[name];
-    let currentLlevel = this.state.levels[name];
+    let upgrades     = this.upgrades();
+    let upgrade      = upgrades[name];
+    let currentLevel = this.state.levels[name];
 
     // update levels hash
     let levels = this.state.levels
     levels[name] = levels[name] + 1
 
     this.setState({
-      amount:            this.state.amount - upgrade['costToLevelUp'](currentLlevel),
-      increasePerSecond: this.state.increasePerSecond + upgrade['levelUpIncreasePerSecond'](currentLlevel),
-      increasePerClick:  this.state.increasePerClick + upgrade['levelUpIncreasePerClick'](currentLlevel),
-      levels:            this.state.levels
+      amount: this.state.amount - upgrade['costToLevelUp'](currentLevel),
+      levels: this.state.levels
+    }, () => {
+      this.updateIncreasePerClick()
+      this.updateIncreasePerSecond()
     })
   }
 

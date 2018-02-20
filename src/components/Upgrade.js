@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _                    from 'lodash';
 
 class Upgrade extends Component {
 
@@ -8,6 +9,16 @@ class Upgrade extends Component {
     this.state = {
       summaryIsOpen: false
     }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      this.state.summaryIsOpen != nextState.summaryIsOpen
+      ||
+      (this.props.amount < this.props.costToLevelUp && nextProps.amount >= nextProps.costToLevelUp)
+      ||
+      this.props.level != nextProps.level
+    )
   }
 
   isBuyable() {
@@ -32,18 +43,29 @@ class Upgrade extends Component {
     })
   }
 
+  totalLevelUpPerClickForLevel(level) {
+    let levelsRange = _.range(1, level + 1)
+
+    return _.sumBy(levelsRange, (level) => {
+      return this.props.levelUpIncreasePerClick(level)
+    })
+  }
+
+  totalLevelUpPerSecondForLevel(level) {
+    let levelsRange = _.range(1, level + 1)
+
+    return _.sumBy(levelsRange, (level) => {
+      return this.props.levelUpIncreasePerSecond(level)
+    })
+  }
+
   increaseTextForLevel(level) {
-    let sentence = '';
-
-    if(this.props.levelUpIncreasePerClick > 0) {
-      sentence += `$${level * this.props.levelUpIncreasePerClick} per click`
+    if(this.props.keyName === 'brainstorming') {
+      return `$${this.totalLevelUpPerClickForLevel(level)} per click`
     }
-
-    if(this.props.levelUpIncreasePerSecond > 0) {
-      sentence += `$${level * this.props.levelUpIncreasePerSecond} per second`
+    else {
+      return `$${this.totalLevelUpPerSecondForLevel(level)} per second`
     }
-
-    return sentence;
   }
 
   render() {
@@ -63,9 +85,9 @@ class Upgrade extends Component {
   }
 
   renderLevelUpButton() {
-    let text    = this.props.level === 0 ? this.props.firstActionText : this.props.nextActionsText;
-    let cursor  = this.isBuyable() ? 'pointer' : 'default';
-    let opacity = this.isBuyable() ? 1.0 : 0.2;
+    let text       = this.props.level === 0 ? this.props.firstActionText : this.props.nextActionsText;
+    let cursor     = this.isBuyable()    ? 'pointer' : 'default';
+    let opacity    = this.isBuyable()    ? 1.0 : 0.2;
 
     return (
       <div className="level-up"
