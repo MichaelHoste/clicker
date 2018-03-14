@@ -4,13 +4,13 @@ class Settings extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return (
-      this.state.saveModalIsOpen != nextState.saveModalIsOpen
+      this.state.saveModalIsOpen !== nextState.saveModalIsOpen
       ||
-      this.state.loadModalIsOpen != nextState.loadModalIsOpen
+      this.state.loadModalIsOpen !== nextState.loadModalIsOpen
       ||
-      this.state.stringToLoad != nextState.stringToLoad
+      this.state.stringToLoad !== nextState.stringToLoad
       ||
-      this.state.savedString != nextState.savedString
+      this.state.savedString !== nextState.savedString
     )
   }
 

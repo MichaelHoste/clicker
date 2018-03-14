@@ -4,9 +4,9 @@ class Revenue extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return (
-      this.props.increasePerSecond != nextProps.increasePerSecond
+      this.props.increasePerSecond !== nextProps.increasePerSecond
       ||
-      this.props.increasePerClick  != nextProps.increasePerClick
+      this.props.increasePerClick  !== nextProps.increasePerClick
     )
   }
 

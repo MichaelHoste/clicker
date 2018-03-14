@@ -13,11 +13,11 @@ class Upgrade extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return (
-      this.state.summaryIsOpen != nextState.summaryIsOpen
+      this.state.summaryIsOpen !== nextState.summaryIsOpen
       ||
       (this.props.amount < this.props.costToLevelUp && nextProps.amount >= nextProps.costToLevelUp)
       ||
-      this.props.level != nextProps.level
+      this.props.level !== nextProps.level
     )
   }
 
