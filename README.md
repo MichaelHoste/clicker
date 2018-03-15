@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-![Image](https://github.com/MichaelHoste/clicker/raw/master/public/startup.png)
+![Image](https://raw.githubusercontent.com/MichaelHoste/clicker/master/startup.png)
 
 ## Install
 
