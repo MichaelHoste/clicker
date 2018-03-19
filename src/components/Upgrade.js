@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import _                    from 'lodash';
+import Summary from './Summary.js';
 
 class Upgrade extends Component {
 
@@ -119,26 +120,10 @@ class Upgrade extends Component {
   renderSummary() {
     if(this.state.summaryIsOpen) {
       return (
-        <div className="summary">
-          <h2 className="name">
-            { this.props.name }
-          </h2>
-          <div className="description">
-            { this.props.description }
-          </div>
-          <div className="current-level">
-            <strong>Current level:</strong>
-            <span className="power">
-              { this.increaseTextForLevel(this.props.level) }
-            </span>
-          </div>
-          <div className="next-level">
-            <strong>Next level:</strong>
-            <span className="power">
-              { this.increaseTextForLevel(this.props.level + 1) }
-            </span>
-          </div>
-        </div>
+        <Summary name={this.props.name}
+                 description={this.props.description}
+                 level={this.props.level}
+                 increaseTextForLevel={this.increaseTextForLevel.bind(this)}  />
       )
     }
   }
